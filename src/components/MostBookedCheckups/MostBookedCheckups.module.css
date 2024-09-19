@@ -1,0 +1,135 @@
+.mostBookedCheckups {
+  padding: 4rem 2rem;
+  background-color: #f8f9fa;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: flex-start;
+  gap: 4rem;
+}
+
+.content {
+  flex: 1;
+  max-width: 400px;
+}
+
+.title {
+  font-size: 2.5rem;
+  color: #333;
+  margin-bottom: 1rem;
+  font-weight: bold;
+}
+
+.description {
+  font-size: 1rem;
+  color: #666;
+  margin-bottom: 2rem;
+}
+
+.viewAllButton {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  color: #3498db;
+  background-color: transparent;
+  border: 2px solid #3498db;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 600;
+}
+
+.viewAllButton:hover {
+  color: #fff;
+  background-color: #3498db;
+}
+
+.checkupsGrid {
+  flex: 2;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+
+.checkupCard {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem;
+  border-radius: 15px;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+.checkupCard:hover {
+  transform: translateY(-5px);
+}
+
+.checkupContent {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.checkupIcon {
+  width: 40px;
+  height: 40px;
+}
+
+.checkupTitle {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #fff;
+}
+
+.chevronIcon {
+  color: #fff;
+}
+
+.checkupColor1 {
+  background: linear-gradient(135deg, #ff6b6b 0%, #f95f5f 100%);
+
+}
+
+.checkupColor2 {
+  background: linear-gradient(135deg,#048dcc 0%, #0569cd 100%);
+
+}
+
+.checkupColor3 {
+  background: linear-gradient(135deg, #ff6b6b 0%, #f95f5f 100%);
+
+}
+
+.checkupColor4 {
+  background: linear-gradient(135deg,#048dcc 0%, #0569cd 100%);
+
+}
+
+@media (max-width: 1024px) {
+  .container {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .content {
+    max-width: 100%;
+    margin-bottom: 2rem;
+  }
+
+  .checkupsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .checkupsGrid {
+    grid-template-columns: 1fr;
+  }
+  
+  .title {
+    font-size: 2rem;
+  }
+}

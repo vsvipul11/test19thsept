@@ -1,0 +1,77 @@
+.otpVerification {
+    padding: 0 20px 20px;
+  }
+  
+  .instruction {
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 15px;
+    text-align: center;
+  }
+  
+  .input {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    outline: none;
+    text-align: center;
+    letter-spacing: 4px;
+  }
+  
+  .input:focus {
+    border-color: #f2994a;
+    box-shadow: 0 0 0 2px rgba(242, 153, 74, 0.2);
+  }
+  
+  .verifyButton {
+    background-color: #f2994a;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 12px;
+    font-size: 16px;
+    font-weight: bold;
+    width: 100%;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .verifyButton:hover {
+    background-color: #e08b3e;
+  }
+  
+  .verifyButton:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  
+  .resendText {
+    font-size: 14px;
+    color: #666;
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  .resendButton {
+    background: none;
+    border: none;
+    color: #f2994a;
+    cursor: pointer;
+    font-size: 14px;
+    text-decoration: underline;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .resendButton:hover {
+    color: #e08b3e;
+  }
+  
+  .resendButton:disabled {
+    color: #ccc;
+    cursor: not-allowed;
+    text-decoration: none;
+  }

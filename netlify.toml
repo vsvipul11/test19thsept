@@ -7,3 +7,4 @@
 
 [build.environment]
   NETLIFY_NEXT_PLUGIN_SKIP = "true"
+  NEXT_PRIVATE_TARGET = "server"

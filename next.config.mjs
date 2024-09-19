@@ -1,10 +1,8 @@
 // next.config.mjs
 export const nextConfig = {
+  // Remove the output: 'export' configuration
   // Set custom directory for build output
   distDir: 'build',
-  
-  // Add the output: 'export' configuration
-  output: 'export',
   
   // TypeScript configuration
   typescript: {

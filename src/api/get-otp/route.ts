@@ -4,7 +4,7 @@ export async function POST(request: NextRequest) {
   const { mobile } = await request.json();
 
   try {
-    const response = await fetch('http://13.233.99.54:4000/api/v1/user/get-otp', {
+    const response = await fetch('https://cadabamsapi.exar.ai/api/v1/user/auth/get-otp', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

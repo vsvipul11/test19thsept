@@ -27,7 +27,7 @@ const OTPVerification: React.FC<OTPVerificationProps> = ({ phoneNumber, onLogin 
 
   const handleVerifyOTP = async (): Promise<void> => {
     try {
-      const response = await fetch('http://13.233.99.54:4000/api/v1/user/verify-otp', {
+      const response = await fetch('https://cadabamsapi.exar.ai/api/v1/user/auth/verify-otp', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -55,7 +55,7 @@ const OTPVerification: React.FC<OTPVerificationProps> = ({ phoneNumber, onLogin 
 
   const handleSignup = async (): Promise<void> => {
     try {
-      const response = await fetch('http://13.233.99.54:4000/api/v1/user/signup', {
+      const response = await fetch('https://cadabamsapi.exar.ai/api/v1/user/signup', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -75,7 +75,7 @@ const OTPVerification: React.FC<OTPVerificationProps> = ({ phoneNumber, onLogin 
 
   const handleSignin = async (): Promise<void> => {
     try {
-      const response = await fetch('http://13.233.99.54:4000/api/v1/user/signin', {
+      const response = await fetch('https://cadabamsapi.exar.ai/api/v1/user/signin', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -95,7 +95,7 @@ const OTPVerification: React.FC<OTPVerificationProps> = ({ phoneNumber, onLogin 
 
   const handleResendOTP = async (): Promise<void> => {
     try {
-      const response = await fetch('http://13.233.99.54:4000/api/v1/user/get-otp', {
+      const response = await fetch('https://cadabamsapi.exar.ai/api/v1/user/auth/get-otp', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -1,0 +1,105 @@
+.footer {
+    background-color: #f8f8f8;
+    padding: 4rem 2rem 2rem;
+    font-family: Arial, sans-serif;
+  }
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  
+  .logoSection {
+    flex-basis: 100%;
+    margin-bottom: 2rem;
+  }
+  
+  .socialIcons {
+    display: flex;
+    gap: 1rem;
+    margin: 1rem 0;
+  }
+  
+  .appStores {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+  
+  .linksSection {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    flex-basis: 100%;
+  }
+  
+  .column {
+    flex-basis: calc(25% - 1rem);
+    margin-bottom: 2rem;
+  }
+  
+  .column h3 {
+    font-size: 1.2rem;
+    color: #333;
+    margin-bottom: 1rem;
+  }
+  
+  .column ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .column ul li {
+    margin-bottom: 0.5rem;
+  }
+  
+  .column ul li a {
+    color: #666;
+    text-decoration: none;
+    font-size: 0.9rem;
+  }
+  
+  .column ul li a:hover {
+    color: #ff6600;
+  }
+  
+  .bottomBar {
+    border-top: 1px solid #e0e0e0;
+    padding-top: 1rem;
+    margin-top: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.8rem;
+    color: #888;
+  }
+  
+  .bottomBar a {
+    color: #888;
+    text-decoration: none;
+  }
+  
+  .bottomBar a:hover {
+    color: #ff6600;
+  }
+  
+  @media (max-width: 768px) {
+    .column {
+      flex-basis: calc(50% - 1rem);
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .column {
+      flex-basis: 100%;
+    }
+  
+    .bottomBar {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+  }

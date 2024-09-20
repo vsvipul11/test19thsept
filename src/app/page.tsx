@@ -10,7 +10,14 @@ import Navbar from '../components/Navbar';
 import SearchBar from '../components/SearchBar';
 import MostBookedCheckups from '@/components/MostBookedCheckups';
 import HealthMonitoring from '@/components/HealthMonitoring';
+import BannerCarousel from '@/components/Banner';
+import VitalBodyOrgans from '@/components/VitalBodyOrgans';
+import TestimonialCarousel from '@/components/TestimonialCarousel ';
+import CadabamsInfo from '@/components/CadabamsInfo';
+import TestsList from '@/components/TestsList';
+import Footer from '@/components/Footer';
 import { loadComponentsState } from '../utils/localstorage';
+
 
 interface ComponentState {
   visible: boolean;
@@ -25,6 +32,10 @@ interface AppState {
   CTAButtons: ComponentState;
   SearchBar: ComponentState;
   HealthMonitoring: ComponentState;
+  BannerCarousel: ComponentState;
+  VitalBodyOrgans: ComponentState;
+  TestimonialCarousel: ComponentState;
+  TestsList: ComponentState;
 }
 
 export default function Home() {
@@ -38,17 +49,19 @@ export default function Home() {
   }, []);
 
   if (!components) {
-    return <div>Loading...</div>; // Or any loading component
+    return <div>Loading...</div>;
   }
 
   return (
     <main>
       {components.Navbar?.visible && <Navbar {...components.Navbar.content} />}
+      
       {components.Hero?.visible && <Hero {...components.Hero.content} />}
       {components.Features?.visible && <Features {...components.Features.content} />}
       {components.MostBookedCheckups?.visible && (
         <MostBookedCheckups {...components.MostBookedCheckups.content} />
       )}
+      
       {components.HealthMonitoring?.visible && components.HealthMonitoring.content && (
         <HealthMonitoring
           title={components.HealthMonitoring.content.title}
@@ -58,11 +71,28 @@ export default function Home() {
           cards={components.HealthMonitoring.content.cards || []}
         />
       )}
-      {components.SearchBar?.visible && <SearchBar {...components.SearchBar.content} />}
+      {components.BannerCarousel?.visible && (
+        <BannerCarousel banners={components.BannerCarousel.content.banners || []} />
+      )}
+      {components.VitalBodyOrgans?.visible && (
+        <VitalBodyOrgans {...components.VitalBodyOrgans.content} />
+      )}
+      {components.TestimonialCarousel?.visible && (
+        <TestimonialCarousel {...components.TestimonialCarousel.content} />
+      )}
+      
+      <CadabamsInfo />
 
-      <Link href="/admin">
-        <button>Admin Panel</button>
-      </Link>
+      {components.TestsList?.visible && (
+        <TestsList
+          bloodTests={components.TestsList.content.bloodTests || []}
+          popularTests={components.TestsList.content.popularTests || []}
+        />
+      )}
+
+<Footer />
+      
+      
     </main>
   );
 }

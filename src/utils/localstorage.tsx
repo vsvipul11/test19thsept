@@ -68,6 +68,40 @@ interface Page {
   faqs: FAQ[];
 }
 
+interface Organ {
+  name: string;
+  icon: string;
+}
+
+interface VitalBodyOrgansContent {
+  title: string;
+  description: string;
+  organs: Organ[];
+  buttonText: string;
+}
+interface Testimonial {
+  id: string;
+  content: string;
+  author: string;
+  location: string;
+  avatar: string;
+}
+
+interface TestimonialCarouselContent {
+  title: string;
+  testimonials: Testimonial[];
+}
+
+interface Test {
+  name: string;
+  link: string;
+}
+
+interface TestsListContent {
+  bloodTests: Test[];
+  popularTests: Test[];
+}
+
 interface ComponentContent {
   buttons?: Button[];
   title?: string;
@@ -84,12 +118,27 @@ interface ComponentContent {
   placeholder?: string;
   trustedBy?: string;
   cards?: Card[];
+  banners?: BannerItem[];
+  vitalBodyOrgans?: VitalBodyOrgansContent;
+  testimonialCarousel?: TestimonialCarouselContent;
+  testsList?: TestsListContent;
+
 }
 
 interface Component {
   visible: boolean;
   content: ComponentContent;
 }
+
+interface BannerItem{
+  id: string;
+  title: string;
+  description: string;
+  buttonText: string;
+  buttonLink: string;
+  imageSrc: string;
+}
+
 
 const defaultState: { [key: string]: Component } = {
   CTAButtons: {
@@ -128,6 +177,91 @@ const defaultState: { [key: string]: Component } = {
           cardDescription: "Regular testing is important for sexual health",
           cardTrustedBy: "500K+ customers"
         },
+      ]
+    }
+  },
+
+  VitalBodyOrgans: {
+    visible: true,
+    content: {
+      title: "For Vital Body Organs",
+      description: "Explore our comprehensive range of diagnostic tests tailored for vital body organs. Our specialized diagnostic tests focus on evaluating the well-being of essential body organs, ensuring you receive the care you deserve.",
+      buttonText: "View All Checkups",
+      organs: [
+        { name: "Heart", icon: "/icons/heart.svg" },
+        { name: "Kidney", icon: "/icons/kidney.svg" },
+        { name: "Liver", icon: "/icons/liver.svg" },
+        { name: "Bone", icon: "/icons/bone.svg" },
+        { name: "Vitamin", icon: "/icons/vitamin.svg" },
+        { name: "Hormones", icon: "/icons/hormones.svg" },
+        { name: "Gut Health", icon: "/icons/gut.svg" },
+        { name: "Blood", icon: "/icons/blood.svg" },
+        { name: "Reproductive Organs", icon: "/icons/reproductive.svg" },
+      ]
+    }
+  },
+
+  TestsList: {
+    visible: true,
+    content: {
+      bloodTests: [
+        { name: 'Dengue Test near me', link: '/tests/dengue' },
+        { name: 'Dengue NS1 Antigen Test near me', link: '/tests/dengue-ns1' },
+        { name: 'Lipid Profile Test near me', link: '/tests/lipid-profile' },
+        // ... (add more blood tests)
+      ],
+      popularTests: [
+        { name: 'BUN Test', link: '/tests/bun' },
+        { name: 'Amh test', link: '/tests/amh' },
+        { name: 'CBC test', link: '/tests/cbc' },
+        // ... (add more popular tests)
+      ]
+    }
+  },
+
+  TestimonialCarousel: {
+    visible: true,
+    content: {
+      title: "What People Say About Us",
+      testimonials: [
+        {
+          id: "1",
+          content: "Superb experience overall. Everything was very well managed right from booking to confirming slots, to pick up and report generation.",
+          author: "Mridul Mimansa",
+          location: "Mumbai",
+          avatar: "/avatars/mridul.jpg"
+        },
+        {
+          id: "2",
+          content: "It was as if my job was already done the minute I chose Orange Health for my blood tests. Very professional and smooth!",
+          author: "Pragya Raj Gupta",
+          location: "Noida",
+          avatar: "/avatars/pragya.jpg"
+        }
+      ]
+    }
+  },
+
+  BannerCarousel: {
+    visible: true,
+    content: {
+      banners: [
+        {
+          id: '1',
+          title: 'Trust us with their care',
+          description: 'Add your parents to unlock ₹3999 Senior Citizen checkup for just ₹1599',
+          buttonText: 'Book Now',
+          buttonLink: '/book-checkup',
+          imageSrc: '/senior-care.jpg'
+        },
+        {
+          id: '2',
+          title: 'Comprehensive Health Checkups',
+          description: 'Get a complete health assessment at discounted prices',
+          buttonText: 'Learn More',
+          buttonLink: '/health-checkups',
+          imageSrc: '/health-checkup.jpg'
+        }
       ]
     }
   },

@@ -57,7 +57,7 @@ export default function AdminPage() {
   const handleConfirm = () => {
     saveComponentsState(components);
     savePagesState(pages);
-    router.push('/');
+    // router.push('/');
   };
 
   if (isLoading) {

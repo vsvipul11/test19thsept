@@ -25,6 +25,31 @@ interface Checkup {
   icon: string;
 }
 
+interface Testimonial {
+  id: string;
+  content: string;
+  author: string;
+  location: string;
+  avatar: string;
+}
+
+
+interface TestimonialCarouselContent {
+  title: string;
+  testimonials: Testimonial[];
+}
+
+interface Test {
+  name: string;
+  link: string;
+}
+
+interface TestsListContent {
+  bloodTests: Test[];
+  popularTests: Test[];
+}
+
+
 interface Card {
   title: string;
   originalPrice: number;
@@ -36,6 +61,19 @@ interface Card {
   cardDescription: string;
   cardTrustedBy: string;
 }
+
+interface Organ {
+  name: string;
+  icon: string;
+}
+
+interface VitalBodyOrgansContent {
+  title: string;
+  description: string;
+  organs: Organ[];
+  buttonText: string;
+}
+
 
 interface ComponentContent {
   buttons?: Button[];
@@ -53,6 +91,11 @@ interface ComponentContent {
   placeholder?: string;
   trustedBy?: string;
   cards?: Card[];
+  banners?: BannerItem[];
+  vitalBodyOrgans?: VitalBodyOrgansContent;
+  testimonialCarousel?: TestimonialCarouselContent;
+  testsList?: TestsListContent;
+
 }
 
 interface Component {
@@ -92,6 +135,16 @@ interface Page {
   packages: Package[];
   faqs: FAQ[];
 }
+
+interface BannerItem {
+  id: string;
+  title: string;
+  description: string;
+  buttonText: string;
+  buttonLink: string;
+  imageSrc: string;
+}
+
 
 interface Props {
   components: { [key: string]: Component };
@@ -206,7 +259,426 @@ const AdminPanel: React.FC<Props> = ({ components, updateComponent, pages, updat
             />
           </div>
         );
-      case 'Features':
+       
+        case 'TestsList':
+        return (
+          <div className={styles.controlGroup}>
+            <h3>Tests List</h3>
+            <h4>Blood Tests</h4>
+            {component.content.bloodTests?.map((test, index) => (
+              <div key={index} className={styles.testItem}>
+                <input
+                  type="text"
+                  value={test.name}
+                  onChange={(e) => {
+                    const updatedTests = [...(component.content.bloodTests || [])];
+                    updatedTests[index] = { ...test, name: e.target.value };
+                    updateComponent(name, { 
+                      content: { ...component.content, bloodTests: updatedTests } 
+                    });
+                  }}
+                  placeholder="Test Name"
+                  className={styles.input}
+                />
+                <input
+                  type="text"
+                  value={test.link}
+                  onChange={(e) => {
+                    const updatedTests = [...(component.content.bloodTests || [])];
+                    updatedTests[index] = { ...test, link: e.target.value };
+                    updateComponent(name, { 
+                      content: { ...component.content, bloodTests: updatedTests } 
+                    });
+                  }}
+                  placeholder="Test Link"
+                  className={styles.input}
+                />
+                <button
+                  onClick={() => {
+                    const updatedTests = component.content.bloodTests!.filter((_, i) => i !== index);
+                    updateComponent(name, { 
+                      content: { ...component.content, bloodTests: updatedTests } 
+                    });
+                  }}
+                  className={styles.deleteButton}
+                >
+                  Delete
+                </button>
+              </div>
+            ))}
+            <button
+              onClick={() => {
+                const newTest = { name: '', link: '' };
+                const updatedTests = [...(component.content.bloodTests || []), newTest];
+                updateComponent(name, { 
+                  content: { ...component.content, bloodTests: updatedTests } 
+                });
+              }}
+              className={styles.addButton}
+            >
+              Add Blood Test
+            </button>
+
+            <h4>Popular Tests</h4>
+            {component.content.popularTests?.map((test, index) => (
+              <div key={index} className={styles.testItem}>
+                <input
+                  type="text"
+                  value={test.name}
+                  onChange={(e) => {
+                    const updatedTests = [...(component.content.popularTests || [])];
+                    updatedTests[index] = { ...test, name: e.target.value };
+                    updateComponent(name, { 
+                      content: { ...component.content, popularTests: updatedTests } 
+                    });
+                  }}
+                  placeholder="Test Name"
+                  className={styles.input}
+                />
+                <input
+                  type="text"
+                  value={test.link}
+                  onChange={(e) => {
+                    const updatedTests = [...(component.content.popularTests || [])];
+                    updatedTests[index] = { ...test, link: e.target.value };
+                    updateComponent(name, { 
+                      content: { ...component.content, popularTests: updatedTests } 
+                    });
+                  }}
+                  placeholder="Test Link"
+                  className={styles.input}
+                />
+                <button
+                  onClick={() => {
+                    const updatedTests = component.content.popularTests!.filter((_, i) => i !== index);
+                    updateComponent(name, { 
+                      content: { ...component.content, popularTests: updatedTests } 
+                    });
+                  }}
+                  className={styles.deleteButton}
+                >
+                  Delete
+                </button>
+              </div>
+            ))}
+            <button
+              onClick={() => {
+                const newTest = { name: '', link: '' };
+                const updatedTests = [...(component.content.popularTests || []), newTest];
+                updateComponent(name, { 
+                  content: { ...component.content, popularTests: updatedTests } 
+                });
+              }}
+              className={styles.addButton}
+            >
+              Add Popular Test
+            </button>
+          </div>
+        );
+         
+        case 'TestimonialCarousel':
+          return (
+            <div className={styles.controlGroup}>
+              <h3>Testimonial Carousel</h3>
+              <input
+                type="text"
+                value={component.content.title || ''}
+                onChange={(e) => updateComponent(name, { 
+                  content: { ...component.content, title: e.target.value } 
+                })}
+                placeholder="Section Title"
+                className={styles.input}
+              />
+              <h4>Testimonials</h4>
+              {component.content.testimonials?.map((testimonial, index) => (
+                <div key={testimonial.id} className={styles.testimonialItem}>
+                  <textarea
+                    value={testimonial.content}
+                    onChange={(e) => {
+                      const updatedTestimonials = [...(component.content.testimonials || [])];
+                      updatedTestimonials[index] = { ...testimonial, content: e.target.value };
+                      updateComponent(name, { 
+                        content: { ...component.content, testimonials: updatedTestimonials } 
+                      });
+                    }}
+                    placeholder="Testimonial Content"
+                    className={styles.textarea}
+                  />
+                  <input
+                    type="text"
+                    value={testimonial.author}
+                    onChange={(e) => {
+                      const updatedTestimonials = [...(component.content.testimonials || [])];
+                      updatedTestimonials[index] = { ...testimonial, author: e.target.value };
+                      updateComponent(name, { 
+                        content: { ...component.content, testimonials: updatedTestimonials } 
+                      });
+                    }}
+                    placeholder="Author Name"
+                    className={styles.input}
+                  />
+                  <input
+                    type="text"
+                    value={testimonial.location}
+                    onChange={(e) => {
+                      const updatedTestimonials = [...(component.content.testimonials || [])];
+                      updatedTestimonials[index] = { ...testimonial, location: e.target.value };
+                      updateComponent(name, { 
+                        content: { ...component.content, testimonials: updatedTestimonials } 
+                      });
+                    }}
+                    placeholder="Author Location"
+                    className={styles.input}
+                  />
+                  <input
+                    type="text"
+                    value={testimonial.avatar}
+                    onChange={(e) => {
+                      const updatedTestimonials = [...(component.content.testimonials || [])];
+                      updatedTestimonials[index] = { ...testimonial, avatar: e.target.value };
+                      updateComponent(name, { 
+                        content: { ...component.content, testimonials: updatedTestimonials } 
+                      });
+                    }}
+                    placeholder="Avatar URL"
+                    className={styles.input}
+                  />
+                  <button
+                    onClick={() => {
+                      const updatedTestimonials = component.content.testimonials!.filter((_, i) => i !== index);
+                      updateComponent(name, { 
+                        content: { ...component.content, testimonials: updatedTestimonials } 
+                      });
+                    }}
+                    className={styles.deleteButton}
+                  >
+                    Delete
+                  </button>
+                </div>
+              ))}
+              <button
+                onClick={() => {
+                  const newTestimonial = { 
+                    id: Date.now().toString(),
+                    content: '',
+                    author: '',
+                    location: '',
+                    avatar: ''
+                  };
+                  const updatedTestimonials = [...(component.content.testimonials || []), newTestimonial];
+                  updateComponent(name, { 
+                    content: { ...component.content, testimonials: updatedTestimonials } 
+                  });
+                }}
+                className={styles.addButton}
+              >
+                Add Testimonial
+              </button>
+            </div>
+          );
+               
+        case 'VitalBodyOrgans':
+        return (
+          <div className={styles.controlGroup}>
+            <h3>Vital Body Organs</h3>
+            <input
+              type="text"
+              value={component.content.title || ''}
+              onChange={(e) => updateComponent(name, { 
+                content: { ...component.content, title: e.target.value } 
+              })}
+              placeholder="Section Title"
+              className={styles.input}
+            />
+            <textarea
+              value={component.content.description || ''}
+              onChange={(e) => updateComponent(name, { 
+                content: { ...component.content, description: e.target.value } 
+              })}
+              placeholder="Section Description"
+              className={styles.textarea}
+            />
+            <input
+              type="text"
+              value={component.content.buttonText || ''}
+              onChange={(e) => updateComponent(name, { 
+                content: { ...component.content, buttonText: e.target.value } 
+              })}
+              placeholder="Button Text"
+              className={styles.input}
+            />
+            <h4>Organs</h4>
+            {component.content.organs?.map((organ, index) => (
+              <div key={index} className={styles.organItem}>
+                <input
+                  type="text"
+                  value={organ.name}
+                  onChange={(e) => {
+                    const updatedOrgans = [...(component.content.organs || [])];
+                    updatedOrgans[index] = { ...organ, name: e.target.value };
+                    updateComponent(name, { 
+                      content: { ...component.content, organs: updatedOrgans } 
+                    });
+                  }}
+                  placeholder="Organ Name"
+                  className={styles.input}
+                />
+                <input
+                  type="text"
+                  value={organ.icon}
+                  onChange={(e) => {
+                    const updatedOrgans = [...(component.content.organs || [])];
+                    updatedOrgans[index] = { ...organ, icon: e.target.value };
+                    updateComponent(name, { 
+                      content: { ...component.content, organs: updatedOrgans } 
+                    });
+                  }}
+                  placeholder="Icon URL"
+                  className={styles.input}
+                />
+                <button
+                  onClick={() => {
+                    const updatedOrgans = component.content.organs!.filter((_, i) => i !== index);
+                    updateComponent(name, { 
+                      content: { ...component.content, organs: updatedOrgans } 
+                    });
+                  }}
+                  className={styles.deleteButton}
+                >
+                  Delete
+                </button>
+              </div>
+            ))}
+            <button
+              onClick={() => {
+                const newOrgan = { name: '', icon: '' };
+                const updatedOrgans = [...(component.content.organs || []), newOrgan];
+                updateComponent(name, { 
+                  content: { ...component.content, organs: updatedOrgans } 
+                });
+              }}
+              className={styles.addButton}
+            >
+              Add Organ
+            </button>
+          </div>
+        );
+        
+        case 'BannerCarousel':
+          return (
+            <div className={styles.controlGroup}>
+              <h3>Banner Carousel</h3>
+              {component.content.banners?.map((banner, index) => (
+                <div key={banner.id} className={styles.bannerItem}>
+                  <input
+                    type="text"
+                    value={banner.title}
+                    onChange={(e) => {
+                      const updatedBanners = [...(component.content.banners || [])];
+                      updatedBanners[index] = { ...banner, title: e.target.value };
+                      updateComponent(name, { content: { ...component.content, banners: updatedBanners } });
+                    }}
+                    placeholder="Banner Title"
+                    className={styles.input}
+                  />
+                  <textarea
+                    value={banner.description}
+                    onChange={(e) => {
+                      const updatedBanners = [...(component.content.banners || [])];
+                      updatedBanners[index] = { ...banner, description: e.target.value };
+                      updateComponent(name, { content: { ...component.content, banners: updatedBanners } });
+                    }}
+                    placeholder="Banner Description"
+                    className={styles.textarea}
+                  />
+                  <input
+                    type="text"
+                    value={banner.buttonText}
+                    onChange={(e) => {
+                      const updatedBanners = [...(component.content.banners || [])];
+                      updatedBanners[index] = { ...banner, buttonText: e.target.value };
+                      updateComponent(name, { content: { ...component.content, banners: updatedBanners } });
+                    }}
+                    placeholder="Button Text"
+                    className={styles.input}
+                  />
+                  <input
+                    type="text"
+                    value={banner.buttonLink}
+                    onChange={(e) => {
+                      const updatedBanners = [...(component.content.banners || [])];
+                      updatedBanners[index] = { ...banner, buttonLink: e.target.value };
+                      updateComponent(name, { content: { ...component.content, banners: updatedBanners } });
+                    }}
+                    placeholder="Button Link"
+                    className={styles.input}
+                  />
+                  <div className={styles.imageUpload}>
+                    <label htmlFor={`bannerImage-${index}`} className={styles.uploadButton}>
+                      <Upload size={20} />
+                      Upload Banner Image
+                    </label>
+                    <input
+                      id={`bannerImage-${index}`}
+                      type="file"
+                      accept="image/*"
+                      onChange={(e) => {
+                        const file = e.target.files?.[0];
+                        if (file) {
+                          const reader = new FileReader();
+                          reader.onloadend = () => {
+                            const updatedBanners = [...(component.content.banners || [])];
+                            updatedBanners[index] = { ...banner, imageSrc: reader.result as string };
+                            updateComponent(name, { content: { ...component.content, banners: updatedBanners } });
+                          };
+                          reader.readAsDataURL(file);
+                        }
+                      }}
+                      className={styles.fileInput}
+                    />
+                  </div>
+                  {banner.imageSrc && (
+                    <img 
+                      src={banner.imageSrc} 
+                      alt={`Banner ${index + 1}`} 
+                      className={styles.imagePreview}
+                    />
+                  )}
+                  <button
+                    onClick={() => {
+                      const updatedBanners = component.content.banners!.filter((_, i) => i !== index);
+                      updateComponent(name, { 
+                        content: { ...component.content, banners: updatedBanners } 
+                      });
+                    }}
+                    className={styles.deleteButton}
+                  >
+                    <Trash2 size={20} />
+                  </button>
+                </div>
+              ))}
+              <button
+                onClick={() => {
+                  const newBanner: BannerItem = {
+                    id: Date.now().toString(),
+                    title: '',
+                    description: '',
+                    buttonText: '',
+                    buttonLink: '',
+                    imageSrc: '',
+                  };
+                  const updatedBanners = [...(component.content.banners || []), newBanner];
+                  updateComponent(name, { 
+                    content: { ...component.content, banners: updatedBanners } 
+                  });
+                }}
+                className={styles.addButton}
+              >
+                <Plus size={20} /> Add Banner
+              </button>
+            </div>
+          );
+        case 'Features':
         return (
           <div className={styles.controlGroup}>
             <h3>Features</h3>
